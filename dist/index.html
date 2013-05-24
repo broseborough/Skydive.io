@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <title>Should I Jump?</title>
+    <link rel="stylesheet" type="text/css" href="ShouldIJump.min.css" />
+    <script src="ShouldIJump.min.js"></script>
+
+    <script>
+    $(function(){
+    	var $page = $("#page");
+    	$("#menuButton").click(function(){
+    		var left = $page.css('left') == '0px' ? '80%' : '0';
+    		$page.css({'left':left});
+    	});
+    });
+    </script>
+</head>
+<body>
+	<div id="page">
+		<nav>
+			<button id="menuButton">Menu</button>
+		</nav>
+		<div id="jumpStatusIcon"></div>
+		<p id="windInfo"><span id="windspeed"></span> mph <span id="windDirection"></span></p>
+		<p id="maxWind">Max: <span id="maxWindspeed"></span> mph</p>
+		<p id="jumpStatusText"></p>
+		<div id="error">
+			<p>There is a weather warning!</p>
+		</div>
+	</div>
+	<ul id="menu">
+		<li><input type="text" placeholder="Search" /></li>
+		<li>Save This Location</li>
+		<li>Current Location</li>
+		<li>a saved location</li>
+		<li>a saved location</li>
+	</ul>
+</body>
+</html>    
