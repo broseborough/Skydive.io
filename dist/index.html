@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width">
@@ -7,35 +8,53 @@
     <link rel="stylesheet" type="text/css" href="ShouldIJump.min.css" />
     <script src="ShouldIJump.min.js"></script>
 
-    <script>
-    $(function(){
-    	var $page = $("#page");
-    	$("#menuButton").click(function(){
-    		var left = $page.css('left') == '0px' ? '80%' : '0';
-    		$page.css({'left':left});
-    	});
-    });
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Mc68hZ5w63Asfiqea9pW3BvoHUtgYc&sensor=true">
     </script>
 </head>
-<body>
-	<div id="page">
-		<nav>
-			<button id="menuButton">Menu</button>
-		</nav>
-		<div id="jumpStatusIcon"></div>
-		<p id="windInfo"><span id="windspeed"></span> mph <span id="windDirection"></span></p>
-		<p id="maxWind">Max: <span id="maxWindspeed"></span> mph</p>
-		<p id="jumpStatusText"></p>
-		<div id="error">
-			<p>There is a weather warning!</p>
+<body id="ng:app" ng-app="main">
+	<div id="donation" ng-controller="donationsController" ng-show="shouldShowRequest()">
+		<div class="content">
+			<h1>Help keep this service alive!</h1>
+			<p>I've had a really fun time creating this little web app, and I hope that it helps skydivers all of the world stay safe. Unfortunately it costs some money to keep this thing up and running. It relies on about 16 different weather services, geolocation services, and other programming APIs. It also costs money to host and serve the app. If you would like, you can help out by making a single donation of any amount that you choose, or setting up a subscription of $5 per month to keep the service alive.</p>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ng-submit="setLastRequestDate()">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="GNQJUREJJ2HKU">
+				<input type="submit" name="submit" alt="One time PayPal Donation" value="Donate with PayPal" class="btn btn-block btn-large">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ng-submit="setLastRequestDate()">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="MFVHBNBNYW6DQ">
+				<input type="submit" name="submit" alt="Subscribe with PayPal" value="Subscribe with PayPal" class="btn btn-block btn-large btn-primary">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+
+			<button class="btn btn-block btn-large" ng-click="setLastRequestDate()">I'm a freeloader</button>
 		</div>
 	</div>
-	<ul id="menu">
-		<li><input type="text" placeholder="Search" /></li>
-		<li>Save This Location</li>
-		<li>Current Location</li>
-		<li>a saved location</li>
-		<li>a saved location</li>
-	</ul>
+	<div id="page" ng-class="{menuOpen: menuOpen}">
+		<nav>
+			<button id="menuButton" ng-click="menuOpen=!menuOpen">Menu</button>
+		</nav>
+		<span ng-view></span>
+	</div>
+	<div id="menu" ng-controller="locationsController">
+		<div class="topBar">
+			<input type="text" placeholder="search" ng-model="searchTerm" search-autocomplete />
+			<p>Current Location: {{currentLocation.city}}, {{currentLocation.state}}, {{currentLocation.country}}<br/><a ng-click="save(currentLocation)" ng-hide="isInSavedLocations(currentLocation)">save this location</a><span ng-show="isInSavedLocations(currentLocation)">saved</span></p>
+		</div>
+		<ul class="autocompleteResults" ng-show="autocompleteResults">
+			<li ng-repeat="result in autocompleteResults" ng-click="setCurrentLocation(result)">{{result.formatted_address}}</li>
+		</ul>
+		<ul id="locations">
+			<li ng-repeat="location in locations" ng-click="setCurrentLocation(location)">{{location.city}}, {{location.state}}, {{location.country}}</li>
+		</ul>
+		<div class="bottomBar">
+			<a class="button" id="settings" href="#/settings">Settings</button>
+			<a class="button" id="about" href="#/about">Information</button>
+		</div>
+	</div>
 </body>
 </html>    

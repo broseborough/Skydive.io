@@ -1,0 +1,8 @@
+<div id="loader" ng-show="forcastAvailable=='pending'"></div>
+<div id="jumpStatusIcon"></div>
+<p id="windInfo">{{windspeed}} mph {{windDirection}}</p>
+<p id="maxWind">Max: {{maxWindspeed}} mph</p>
+<p id="jumpStatusText">{{message}}</p>
+<a ng-href="{{alert.uri}}" class="alert" ng-show="alert">
+	<p>{{alert.title}}</p>
+</a>

@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       dist: {
-        src: ['components/requirejs/require.js', 'components/jquery/jquery.js', 'components/json2/json2.js','src/**/*.js'],
+        src: ['components/angular/angular.min.js', 'src/main.js','src/**/*.js'],
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
@@ -51,11 +51,11 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true,
         globals: {
-          jQuery: true,
-          $: true,
-          module: true,
-          define: true, 
-          require: true
+          angular: true,
+          main: true,
+          geolocation: true,
+          suggestion: true,
+          google: true
         }
       },
       gruntfile: {
