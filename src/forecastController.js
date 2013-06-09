@@ -9,10 +9,11 @@ function forecastController($scope, $http, $rootScope, geolocation){
 
 	function retreiveForcast(geolocation){
 		$scope.forcastAvailable = "pending";
-		var targetTime = new Date(new Date().getTime() - 1800000);
+		var targetTime = new Date((new Date().getTime()-1800000)/1000);
 		$http({
 			method: 'GET', 
-			url: 'forecast.json.php/' + geolocation.latitude + '/' + geolocation.longitude + '/' + targetTime.getTime()
+			url: 'forecast.php/' + geolocation.latitude + '/' + geolocation.longitude + '/' + targetTime.getTime() //UNIX Time
+			//targetTime is ignored for the moment in favor of using the forecast for the next 30 mins because forecast.io doesn't provide minutely data for time machine requests.
 		})
 		.success(function(data){
 			$scope.forcastAvailable = true;
@@ -20,10 +21,10 @@ function forecastController($scope, $http, $rootScope, geolocation){
 			$scope.windspeed = Math.round(data.currently.windSpeed);
 			
 			var maxWindspeed = 0;
-
-			for(var i=0; i<data.hourly.data.length; i++){
-				var hour = data.hourly.data[i];
-				maxWindspeed = maxWindspeed < hour.windSpeed ? hour.windSpeed : maxWindspeed;
+			for(var i=0; i<data.minutely.data.length; i++){
+				var minute = data.minutely.data[i];
+				window.console.log(new Date(minute.time*1000));
+				maxWindspeed = maxWindspeed < minute.windSpeed ? minute.windSpeed : maxWindspeed;
 			}
 			$scope.maxWindspeed = Math.round(maxWindspeed);
 
