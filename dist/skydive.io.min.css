@@ -1,4 +1,4 @@
-/*! skydive.io - v0.0.0 - 2013-06-09
+/*! skydive.io - v0.0.0 - 2013-06-10
 * Copyright (c) 2013 ; Licensed  */
 html,
 body,
@@ -610,6 +610,22 @@ body #page nav button {
   text-indent: 100%;
   font-size: 1px;
   margin: 10px;
+}
+body #page .content {
+  padding: 0 60px 50px;
+}
+body #page .content h1 {
+  margin-bottom: 50px;
+  text-align: center;
+}
+body #page .content label {
+  display: block;
+  font: bold 1.5em/1em 'Helvetica', sans-serif;
+}
+body #page .content select {
+  display: block;
+  width: 100%;
+  margin-bottom: 50px;
 }
 body #page #jumpStatusIcon {
   position: absolute;
