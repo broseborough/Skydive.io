@@ -1,7 +1,7 @@
 <?php
 	include_once 'route.php';
 	$route = new route();
-	$route->map('playground/ShouldIJump/dist/forecast/{latitude}/{longitude}/{time}');
+	$route->map('/Skydive.io/dist/forecast/{latitude}/{longitude}/{time}');
 	//Time is ignored for the moment in favor of using the forecast for the next 30 mins because forecast.io doesn't provide minutely data for time machine requests.
 
 	$API_KEY = 'eac26d42e9bb85f983071f09af5561e5';

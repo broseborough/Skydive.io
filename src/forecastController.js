@@ -20,10 +20,9 @@ function forecastController($scope, $http, $rootScope, geolocation){
 			$scope.alert = data.alert ? data.alert[1] : null;
 			$scope.windspeed = Math.round(data.currently.windSpeed);
 			
-			var maxWindspeed = 0;
+			var maxWindspeed = 0 < $scope.windspeed ? $scope.windspeed : 0;
 			for(var i=0; i<data.minutely.data.length; i++){
 				var minute = data.minutely.data[i];
-				window.console.log(new Date(minute.time*1000));
 				maxWindspeed = maxWindspeed < minute.windSpeed ? minute.windSpeed : maxWindspeed;
 			}
 			$scope.maxWindspeed = Math.round(maxWindspeed);

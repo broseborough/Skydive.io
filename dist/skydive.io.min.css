@@ -565,15 +565,6 @@ body {
   height: 100%;
   overflow: hidden;
 }
-body #loader {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  background: #ffffff url('images/ajax-loader.gif') center center no-repeat;
-}
 body #donation {
   position: absolute;
   top: 0px;
@@ -631,6 +622,14 @@ body #page #jumpStatusIcon {
   margin: 0 auto;
   opacity: .2;
   z-index: 0;
+}
+body #page #jumpStatusIcon.pending {
+  background: url('images/ajax-loader.gif') center center no-repeat;
+  background-size: 24px 24px;
+}
+body #page #jumpStatusIcon.error {
+  background: url('../vectors/noun_project_13462.svg') center center no-repeat;
+  background-size: 24px 24px;
 }
 body #page #jumpStatusText {
   position: absolute;
@@ -760,6 +759,7 @@ body #menu #locations {
   bottom: 40px;
   left: 0;
   right: 0;
+  z-index: 0;
 }
 body #menu .bottomBar {
   position: absolute;
@@ -802,6 +802,7 @@ body #menu .autocompleteResults {
   left: 0;
   right: 0;
   background: #fff;
+  z-index: 1;
 }
 body #menu .autocompleteResults li {
   color: #000;
