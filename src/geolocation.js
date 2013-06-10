@@ -29,8 +29,8 @@ main.factory('geolocation', function(){
 	};
 
 	$scope.parseGoogleResult = function(result){
-		result.latitude = result.geometry.location.lat();
-		result.longitude = result.geometry.location.lng();
+		result.latitude = result.latitude || result.geometry.location.lat();
+		result.longitude = result.longitude || result.geometry.location.lng();
 		result.city = result.address_components[0].short_name;
 		result.state = result.address_components[2].short_name;
 		result.country = result.address_components[3].short_name;
